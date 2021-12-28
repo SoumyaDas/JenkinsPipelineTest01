@@ -9,7 +9,6 @@ pipeline {
         }
         stage('Build') {
           steps {
-            deleteDir()
             checkout scm
             sh "npm install"
             stash includes: 'node_modules/', name: 'node_modules'
@@ -18,7 +17,6 @@ pipeline {
 
         stage('Test') {
           steps {
-            deleteDir()
             unstash 'node_modules'
             sh "npm run test"
           }
